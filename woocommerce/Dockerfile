@@ -3,8 +3,6 @@ MAINTAINER Kristian Østergaard Martensen <km@shipbeat.com>
 
 ENV WOOCOMMERCE_VERSION 2.4.10
 ENV WOOCOMMERCE_UPSTREAM_VERSION 2.4.10
-ENV FTP_VIRT_USER iamauser
-ENV FTP_VIRT_PASS letmein
 
 RUN apt-get update \
     && apt-get install -y --no-install-recommends unzip wget vsftpd db5.3-util \
