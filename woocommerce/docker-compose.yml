@@ -1,0 +1,39 @@
+wordpress:
+   container_name: woocommerce
+   image: shipbeat/woocommerce
+   links:
+    - db:mysql
+   ports:
+    - 8080:80
+
+db:
+   container_name: woo_mariadb
+   image: mariadb
+   environment:
+    MYSQL_ROOT_PASSWORD: example
+   ports:
+    - 3307:3306
+
+ftp:
+   container_name: woo_ftp
+   image: shipbeat/proftpd
+   volumes_from:
+    - wordpress
+   environment:
+    - USERNAME=shipbeat
+    - PASSWORD=spis2kager
+   ports:
+    - 12000:12000
+    - 12001:12001
+    - 12002:12002
+    - 12003:12003
+    - 12004:12004
+    - 12005:12005
+    - 2020:20
+    - 2121:21
+
+mongo:
+   container_name: importmachine
+   image: mongo:latest
+   ports:
+    - 27117:27017
