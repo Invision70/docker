@@ -6,7 +6,7 @@ At shipbeat we use this container specifically for ftp'ing into a webserver, run
 Like this:  
 
     docker run -p 21:21 -p 20:20 -p 12000-12005:12000-12005 \  
-    -e USERNAME=username -e PASSWORD=password \  
+    --env USERNAME=username --env PASSWORD=password \  
     --volumes-from woocommerce:rw \  
     shipbeat/proftpd
 
