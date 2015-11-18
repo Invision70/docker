@@ -20,8 +20,8 @@ ftp:
    volumes_from:
     - wordpress
    environment:
-    - USERNAME=shipbeat
-    - PASSWORD=spis2kager
+    - USERNAME=username
+    - PASSWORD=password
    ports:
     - 12000:12000
     - 12001:12001
