@@ -3,5 +3,6 @@
 echo Setting credentials to $USERNAME:$PASSWORD
 PASSWORD=$(perl -e 'print crypt($ARGV[0], "password")' $PASSWORD)
 userdel www-data
-useradd --shell /bin/sh --create-home --password -u 33 -g 33 $PASSWORD $USERNAME
+groupadd --gid 33 $USERNAME
+useradd --shell /bin/sh --create-home --uid 33 --gid 33 --password $PASSWORD $USERNAME
 exec proftpd --nodaemon
