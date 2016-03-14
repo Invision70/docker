@@ -10,7 +10,7 @@ Reverse proxy configuration variables:
 - REVERSE_PROXY_IP: IP address of your reverse proxy server, '.'s must be triple-escaped!
 
 How to run teamcity, behind a reverse proxy and linked to a mysql container:
-'''
+```
 # initialize mariadb container  
 docker run --name mymariadb -v mysql_data_dir:/var/lib/mysql -e MYSQL_ROOT_PASSWORD=vewysecrat -e MYSQL_USER=teamcity MYSQL_PASSWORD=vewysecrat -d mariadb:latest  
 # create teamcity database and grant permissions  
@@ -21,16 +21,17 @@ docker run -d -v teamcity_data_dir:/var/lib/teamcity --name=teamcitysrv \
    -e PUBLIC_HOST_NAME=buildserver.example.local \  
    -e REVERSE_PROXY_IP="10\\\.10\\\.10\\\.10" \  
    --link mymariadb:mysql -p 8111:8111 shipbeat/teamcity-server
-'''
+```
 
+  
 How to upgrade to a new version?  
 You could simply migrate the volumes using the `--volumes-from` option:
-'''
+```
 docker stop OLD_teamcity_server  
 docker pull shipbeat/teamcity-server  
 docker run -d --volumes-from=OLD_teamcity_server --name=NEW_teamcity_server \  
    -e PUBLIC_HOST_NAME=buildserver.example.local \  
    -e REVERSE_PROXY_IP="10\\\.10\\\.10\\\.10" \  
    --link mymysql:mysql -p 8111:8111 shipbeat/teamcity-server  
-'''
+```
 Notice that you'll have to pass your proxy settings again, since configuration is overwritten by the container upgrade.
