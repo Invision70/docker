@@ -17,7 +17,7 @@ So, now we can start our backup with this command:
     docker run --name tcbak --rm=true \
     --volumes-from teamcitysrv \
     -e TEAMCITY_BASE_URL="http://teamcity.server.at.shipbeat" \
-    -e TEAMCITY_USERNAME=poweruser \
+    -e TEAMCITY_USERNAME=backupoperator \
     -e TEAMCITY_PASSWORD=secretpass \
     -e AWS_S3_BUCKET=teamcity-backup-bucket \
     -e AWS_ACCESS_KEY=xxxxxxxx \
