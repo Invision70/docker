@@ -16,13 +16,13 @@ So, now we can start our backup with this command:
 ```shell
     docker run --name tcbak --rm=true \
     --volumes-from teamcitysrv \
-    -e TEAMCITY_BASE_URL http://teamcity.server.at.shipbeat \
-    -e TEAMCITY_USERNAME poweruser \
-    -e TEAMCITY_PASSWORD secretpass \
-    -e AWS_S3_BUCKET teamcit-backup-bucket \
-    -e AWS_ACCESS_KEY xxxxxxxx \
-    -e AWS_SECRET_KEY xxxxxxxx \
-    -e KEEP_DAYS 7 \
+    -e TEAMCITY_BASE_URL="http://teamcity.server.at.shipbeat" \
+    -e TEAMCITY_USERNAME=poweruser \
+    -e TEAMCITY_PASSWORD=secretpass \
+    -e AWS_S3_BUCKET=teamcity-backup-bucket \
+    -e AWS_ACCESS_KEY=xxxxxxxx \
+    -e AWS_SECRET_KEY=xxxxxxxx \
+    -e KEEP_DAYS=7 \
      shipbeat/teamcity-backup
 ```
 The container will stop and remove itself as soon as it finishes.
