@@ -22,5 +22,6 @@ VOLUME ["/var/lib/teamcity"]
 ADD teamcity_backup.py /teamcity_backup.py
 ADD push_to_s3.py /push_to_s3.py
 ADD launch /launch
+RUN chmod +x /launch 
 
 ENTRYPOINT /launch
