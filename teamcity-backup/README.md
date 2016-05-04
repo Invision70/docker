@@ -13,7 +13,7 @@ There's quite a few environment variables that must be set in order for this to 
 ```
 
 So, now we can start our backup with this command:
-```shell
+```bash
     docker run --name tcbak --rm=true \
     --volumes-from teamcitysrv \
     -e TEAMCITY_BASE_URL http://teamcity.server.at.shipbeat \
