@@ -2,6 +2,7 @@ import boto3
 import argparse
 import glob
 import os
+from datetime import datetime, timedelta, timezone
 
 parser = argparse.ArgumentParser(description='Push a TeamCity backup to AWS S3')
 parser.add_argument('-bucket', required=True, type=str, metavar='teamcity-backup-bucket',
@@ -28,7 +29,7 @@ s3client = boto3.client(
 
 # Since we mount teamcity data volume from our teamcity-server container,
 # we know backups are located in /var/lib/teamcity/backups
-backups = glob.glob('/Users/kristian/teamcity/backup/*.zip')
+backups = glob.glob('/var/lib/teamcity/backup/*.zip')
 print(backups)
 for abspath in backups:
     tail = os.path.split(abspath)[1]
@@ -37,13 +38,10 @@ for abspath in backups:
 
 # If enabled, remove all backups older than 'threshold' days
 if args.threshold > 0:
-    s3 = boto3.resource('s3')
-    bucket = s3.Bucket(args.bucket)
-    for obj in s3client.list_objects(Bucket=args.bucket):
-        obj_details = obj['Contents'][0]
-        if obj_details['LastModified'] < start_date:
-            print("removing object with key: %s, from bucket: %s" % (obj_details['Key'],args.bucket))
+    for obj in s3client.list_objects(Bucket=args.bucket)['Contents']:
+        if obj['LastModified'] < start_date:
+            print("removing object with key: %s, from bucket: %s" % (obj['Key'],args.bucket))
             response = s3client.delete_object(
                 Bucket=args.bucket,
-                Key=obj_details['Key'])
+                Key=obj['Key'])
             print(response)
