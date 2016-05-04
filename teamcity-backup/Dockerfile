@@ -19,9 +19,10 @@ RUN apk add --no-cache python3 && \
 
 VOLUME ["/var/lib/teamcity"]
 
-ADD teamcity_backup.py /teamcity_backup.py
-ADD push_to_s3.py /push_to_s3.py
-ADD launch /launch
-RUN chmod +x /launch 
+COPY launch.sh /launch.sh
+COPY teamcity_backup.py /teamcity_backup.py
+COPY push_to_s3.py /push_to_s3.py
 
-ENTRYPOINT /launch
+RUN chmod +x /launch.sh
+
+ENTRYPOINT /launch.sh
