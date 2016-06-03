@@ -14,7 +14,7 @@ RUN DEBIAN_FRONTEND=noninteractive \
     rm -rf /var/lib/{apt,dpkg,cache,log}
 
 # Install teamcity
-RUN curl -s http://download-ln.jetbrains.com/teamcity/TeamCity-9.1.6.tar.gz | tar -xzC /opt;
+RUN curl -skL https://download.jetbrains.com/teamcity/TeamCity-9.1.7.tar.gz | tar -xzC /opt;
 
 COPY server.xml $TEAMCITY_CONF_PATH/server.xml
 COPY run-teamcity-server.sh /run-teamcity-server.sh
