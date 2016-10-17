@@ -15,4 +15,4 @@ RUN apt-get update \
 RUN curl -L "https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar" > /usr/bin/wp && \
     chmod +x /usr/bin/wp
 
-VOLUME ["/var/www/html"]
+VOLUME ["/var/www/html", "/usr/src/wordpress"]
